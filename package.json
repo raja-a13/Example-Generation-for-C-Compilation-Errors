@@ -1,0 +1,13 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "scripts": {
+    "server": "cd backend && node server.js",
+    "frontend": "npm start --prefix frontend",
+    "start": "concurrently \"npm run server\" \"npm run frontend\""
+  }
+}
