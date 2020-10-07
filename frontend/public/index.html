@@ -29,15 +29,26 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <!-- <script>
+      // The Ace editor needs divs instead of textareas
+      // So we hide the textarea and show a div instead
+      var editorElement = document.getElementById("text-code");
+      editorElement.classList.add("hidden");
+      document.getElementById("text-code-ace").classList.remove("hidden");
+      ace.config.set('basePath', '%PUBLIC_URL%/ace');
+      
+      // Set up the editor
+      var editor = ace.edit("text-code-ace");
+      editor.getSession().setUseWorker(false);
+      editor.setTheme("ace/theme/tomorrow");
+      var language = "c_cpp";
+      editor.getSession().setMode("ace/mode/" + language);
+  
+      // Make sure we copy the content of the editor to the textarea before posting
+      // its content to the server
+      document.getElementById("launch-button").addEventListener("click", function () {
+          editorElement.innerHTML = editor.getValue();
+      });
+  </script> -->
   </body>
 </html>

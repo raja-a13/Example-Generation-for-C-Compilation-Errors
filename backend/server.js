@@ -27,6 +27,7 @@ app.get('/hi',(req,res)=>{
 	res.send("hi")
 })
 
+
 app.get('/',(req,res)=>{
 	res.send("invalid request")
 })
