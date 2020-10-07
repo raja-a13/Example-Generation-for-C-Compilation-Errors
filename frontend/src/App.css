@@ -15,7 +15,7 @@ li {
 
 #content {
     position: absolute;
-    top: 50px;
+    top: 30px;
     min-height: 600px;
     min-width: 900px;
     width: 100%;
@@ -28,8 +28,8 @@ li {
     min-height: 350px;
     min-width: 400px;
     left: 10px;
-    top: 5px;
-    width: 48%;
+    top: 54px;
+    width: 40%;
 }
 
 #result {
@@ -39,7 +39,7 @@ li {
     min-width: 400px;
     right: 10px;
     top: 5px;
-    width: 48%;
+    width: 50%;
 }
 
 #compile {

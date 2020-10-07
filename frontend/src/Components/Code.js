@@ -1,22 +1,41 @@
-import React,{useState,useEffect,Component} from 'react';
+import React,{useState,useEffect} from 'react';
 import AceEditor from 'react-ace';
+
+import {sendCode} from "./apiFunctions"
 
 import 'brace/mode/c_cpp'
 import 'brace/theme/github'
 
 function Code() {
-  const rows = 15;
+  const rows = 20;
   const cols = 60;
 
   const [code,setCode] = useState("");
   const [value,changeVal] = useState("");
 
   function onChange(newValue) {
-      console.log("change", newValue);
-      changeVal(newValue);
+      // console.log("change", newValue);
+      setCode(newValue);
   }
   function onLoad(newValue) {
       console.log("load", newValue);
+  }
+  function submitCode(){
+    if(code !== ""){
+      console.log(code)
+      sendCode({"code":code})
+        .then(res =>{
+            if (res.status){
+                console.log(res.data)
+            }          
+            else{
+                console.log(res.error)
+            }
+        })
+        .catch(err =>{
+            console.log('error:-' + err)
+        })
+    }
   }
 
 
@@ -27,6 +46,8 @@ function Code() {
       enableSnippets: false,
       showLineNumbers: true,
       tabSize: 2,
+      minLines : rows,
+      maxLines : rows
   }
   return (
     <div className="Code" id="code">
@@ -34,8 +55,8 @@ function Code() {
       <div id="title-code" className="head-section">
         Source Code
       </div>
-      <input id="launch-button" className="head-section" type="submit" value="Launch" />
-
+      {/* <input id="launch-button" className="head-section" type="submit" value="Run" onSubmit={submitCode}/> */}
+      <button id="launch-button" className="head-section"  onClick={submitCode} >Run </button>
       <AceEditor
         placeholder="enter your code"
         mode="c_cpp"
@@ -47,7 +68,7 @@ function Code() {
         showPrintMargin={true}
         showGutter={true}
         highlightActiveLine={true}
-        value={value}
+        value={code}
         setOptions={options}
         />
     </div>

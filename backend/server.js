@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const app= express();
 const port= 8001;
 
+
+const saveToFile = require('./utils/writeToFile')
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -25,6 +27,18 @@ app.use('/home', homeRoutes);
 
 app.get('/hi',(req,res)=>{
 	res.send("hi")
+})
+
+app.post('/reciveCode',(req,res)=>{
+	
+	var data = req.body;
+	
+	if(data && data["code"] !== ""){
+		saveToFile("./cfiles/1.c",data["code"]);
+		console.log(data["code"])
+	}
+	var response = {"status":1,"data":"recived","error":""}
+	res.send(response)
 })
 
 
