@@ -20,7 +20,27 @@ function Code() {
   function onLoad(newValue) {
       console.log("load", newValue);
   }
-  function submitCode(){
+
+  function saveCode(){
+    if(code !== ""){
+      console.log(code)
+      sendCode({"code":code})
+        .then(res =>{
+            if (res.status){
+                console.log(res.data)
+            }          
+            else{
+                console.log(res.error)
+            }
+        })
+        .catch(err =>{
+            console.log('error:-' + err)
+        })
+    }
+  }
+
+
+  function runCode(){
     if(code !== ""){
       console.log(code)
       sendCode({"code":code})
@@ -56,7 +76,10 @@ function Code() {
         Source Code
       </div>
       {/* <input id="launch-button" className="head-section" type="submit" value="Run" onSubmit={submitCode}/> */}
-      <button id="launch-button" className="head-section"  onClick={submitCode} >Run </button>
+      <div id="launch-button">
+      <button  className="head-section top-run"  onClick={runCode}  >Run </button><br />
+      <button  className="head-section bottom-save"  onClick={saveCode} >Save </button>
+      </div>
       <AceEditor
         placeholder="enter your code"
         mode="c_cpp"
