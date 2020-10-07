@@ -1,11 +1,11 @@
-#include<stdio.h>
+#include <stdio.h>
 
-
-int main(){
-
-int i =0;
-int j = 0;
-return 0;
-
-
+int main() {
+    int n =10;
+	
+	for(int i=0;i<n;i++){
+		print("%d" i);
+    }
+	
+    return 0;
 }
