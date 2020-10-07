@@ -6,7 +6,7 @@ import {sendCode} from "./apiFunctions"
 import 'brace/mode/c_cpp'
 import 'brace/theme/github'
 
-function Code() {
+function Code({clickRun}) {
   const rows = 20;
   const cols = 60;
 
@@ -42,19 +42,20 @@ function Code() {
 
   function runCode(){
     if(code !== ""){
-      console.log(code)
-      sendCode({"code":code})
-        .then(res =>{
-            if (res.status){
-                console.log(res.data)
-            }          
-            else{
-                console.log(res.error)
-            }
-        })
-        .catch(err =>{
-            console.log('error:-' + err)
-        })
+      // console.log(code)
+      clickRun();
+      // sendCode({"code":code})
+      //   .then(res =>{
+      //       if (res.status){
+      //           console.log(res.data)
+      //       }          
+      //       else{
+      //           console.log(res.error)
+      //       }
+      //   })
+      //   .catch(err =>{
+      //       console.log('error:-' + err)
+      //   })
     }
   }
 

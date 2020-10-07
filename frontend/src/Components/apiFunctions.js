@@ -18,8 +18,8 @@ export const sendCode = (data) => {
   });
 };
 
-export const getExamples = (code) => {
-  return axios.post('http://localhost:8001/home/run', code).then((res) => {
+export const getExamples = () => {
+  return axios.post('http://localhost:8001/home/run').then((res) => {
     if (res.data.error) {
       const check = {
         status: false,

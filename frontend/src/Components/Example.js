@@ -1,9 +1,15 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 
-function Example() {
+function Example({examples}) {
+  const [ex,setEx] = useState(examples);
+
+  useEffect(() => {
+    console.log("change");
+    setEx(examples)
+  },[examples])
   return (
     <div className="Example">
-      <div>Example</div>
+      <div>{ex}</div>
     </div>
   );
 }

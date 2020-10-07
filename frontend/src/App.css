@@ -71,6 +71,7 @@ li {
 #title-code {
     position: absolute;
     left: 5px;
+    top: -50px;
 }
 
 #title-result {
