@@ -1,7 +1,7 @@
 import React,{useState,useEffect,createContext} from 'react';
 import './App.css';
 
-
+import {getExamples} from "./Components/apiFunctions"
 
 import Code from "./Components/Code"
 import Output from "./Components/Output"
@@ -18,13 +18,28 @@ function App() {
   const [outputs,setOutputs] = useState("outputs");
   const [error,setErrors] = useState("errors");
 
-  const updateErrors = (errors) => {setErrors(errors)}
-  const updateExamples = (examples) => {setExamples(examples)}
-  const updateOutputs = (out) => {setOutputs(out)}
+  // const updateErrors = (errors) => {setErrors(errors)}
+  // const updateExamples = (examples) => {setExamples(examples)}
+  // const updateOutputs = (out) => {setOutputs(out)}
 
-  const api = {updateErrors,updateExamples,updateOutputs}
+  // const api = {updateErrors,updateExamples,updateOutputs}
+
   const clickRun = () => {
       console.log("run")
+      getExamples()
+        .then(res =>{
+            if (res.status){
+                console.log("clang",res.clang)
+                console.log("examples",res.exapmles)
+            }          
+            else{
+                console.log(res.error)
+            }
+        })
+        .catch(err =>{
+            console.log('error:-' + err)
+        })
+
       setErrors("1");
       setExamples("2");
       setOutputs("3");
