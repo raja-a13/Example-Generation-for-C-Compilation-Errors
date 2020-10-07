@@ -58,12 +58,29 @@ router.post('/run', async (req, res) => {
     var stdout = child.output[1];
     var stderr = child.output[2];
 
+    var array = stdout.match(/[^\s.!?]+[^.!?\r\n]+[.!?]*/g);
+
+    var index_clang = array.indexOf('Clang output on the given code ...');
+    var index_clang_end = array.indexOf('Erroneous lineNums:');
+    var index_examples = array.indexOf('Examples:');
+
+    var clang = array.slice(index_clang + 1, index_clang_end);
+    var examples = array.slice(index_examples + 1);
+
+    clang = clang.join('\n');
+    examples = examples.join('\n');
+
+    // console.log(clang);
+    // console.log(999999999999);
+    // console.log(examples);
+
     if (stdout === null && stderr == null) {
       console.log('Execution Error');
       res.send('Execution Error');
     } else {
       res.send({
-        stdout: stdout,
+        clang: clang,
+        examples: examples,
         msg: 'Execution OK',
       });
     }
