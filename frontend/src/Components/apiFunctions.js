@@ -20,6 +20,7 @@ export const sendCode = (data) => {
 
 export const getExamples = () => {
   return axios.post('http://localhost:8001/home/run').then((res) => {
+    // console.log(res);
     if (res.data.error) {
       const check = {
         status: false,
@@ -29,8 +30,8 @@ export const getExamples = () => {
     } else {
       const check = {
         status: true,
-        clang: res.clang,
-        exapmles: res.exapmles,
+        clang: res.data.clang,
+        examples: res.data.examples,
       };
       return check;
     }

@@ -57,18 +57,34 @@ router.post('/run', async (req, res) => {
 
     var stdout = child.output[1];
     var stderr = child.output[2];
+    console.log(stdout);
 
-    var array = stdout.match(/[^\s.!?]+[^.!?\r\n]+[.!?]*/g);
+    var array = stdout.match(/[^\s.!?]+[^.!?\r\n]+[\d.!?]*/g);
+    console.log(array);
 
     var index_clang = array.indexOf('Clang output on the given code ...');
     var index_clang_end = array.indexOf('Erroneous lineNums:');
-    var index_examples = array.indexOf('Examples:');
+    var index_examples = array.indexOf('LineNum:');
 
-    var clang = array.slice(index_clang + 1, index_clang_end);
-    var examples = array.slice(index_examples + 1);
+    var diff = index_clang_end - index_clang;
+    // console.log(diff);
 
-    clang = clang.join('\n');
-    examples = examples.join('\n');
+    var clang;
+    var examples;
+    if (index_examples == -1 && diff == 1) {
+      clang = 'No Errors';
+      examples = 'No examples provided as there are no errors';
+    } else if (index_examples == -1 && diff !== 1) {
+      clang = array.slice(index_clang + 1, index_clang_end);
+      clang = clang.join('\n');
+      examples = 'No examples provided as there are no errors';
+    } else {
+      clang = array.slice(index_clang + 1, index_clang_end);
+      examples = array.slice(index_examples);
+
+      clang = clang.join('\n');
+      examples = examples.join('\n');
+    }
 
     // console.log(clang);
     // console.log(999999999999);
