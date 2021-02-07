@@ -1,0 +1,25 @@
+
+.hiddenRow {
+    box-shadow: inset 0px 1.5px 9px -1px rgba(0,0,0,0.51);
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+}
+thead{
+    background-color: #009879;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+tbody>tr {
+    cursor: pointer;
+}
+.Example{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.lst-item {
+    display: list-item;
+}
+

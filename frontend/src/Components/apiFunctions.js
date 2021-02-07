@@ -32,6 +32,7 @@ export const getExamples = () => {
         status: true,
         clang: res.data.clang,
         examples: res.data.examples,
+        errLines: res.data.errLines
       };
       return check;
     }

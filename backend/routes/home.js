@@ -45,7 +45,6 @@ router.post('/run', async (req, res) => {
   try {
     var child = spawn(
       'cd btp_example_generation && python3 -m src.run ./data/examples/run.c',
-
       {
         shell: true,
         stdio: 'pipe',
@@ -57,10 +56,17 @@ router.post('/run', async (req, res) => {
 
     var stdout = child.output[1];
     var stderr = child.output[2];
-    console.log(stdout);
-
+    // console.log(stdout);
+    
     var array = stdout.match(/[^\s.!?]+[^.!?\r\n]+[\d.!?]*/g);
-    console.log(array);
+    var temp = stdout.match(/(?<=output\s).*(?=\soutput)/g);
+    if(temp && temp.length > 0){
+      var arr = JSON.parse(temp[0])
+      // console.log(arr)
+    }
+    // console.log(stdout.length)
+    // console.log("array :",array);
+    
 
     var index_clang = array.indexOf('Clang output on the given code ...');
     var index_clang_end = array.indexOf('Erroneous lineNums:');
@@ -95,8 +101,9 @@ router.post('/run', async (req, res) => {
       res.send('Execution Error');
     } else {
       res.send({
-        clang: clang,
-        examples: examples,
+        clang: arr.clang,
+        examples: arr.example,
+        errLines:arr.errLines,
         msg: 'Execution OK',
       });
     }

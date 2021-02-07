@@ -7,6 +7,8 @@ function Compile({ error }) {
     console.log('change');
     setErr(error);
   }, [error]);
+
+  
   return (
     <div className='compile' id='compile'>
       <div id='title-compile' class='head-section'>

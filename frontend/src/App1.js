@@ -20,10 +20,12 @@ function App() {
   // const updateOutputs = (out) => {setOutputs(out)}
 
   // const api = {updateErrors,updateExamples,updateOutputs}
+  
 
   const clickRun = () => {
     setErrors('loading...');
     setOutputs('loading...');
+    setExamples('loading...');
     console.log('run');
     getExamples()
       .then((res) => {
@@ -32,6 +34,7 @@ function App() {
           // console.log('examples', res.examples);
           setErrors(res.examples);
           setOutputs(res.clang);
+          setExamples({"examples":res.examples,"errLines":res.errLines});
         } else {
           console.log(res.error);
         }
@@ -50,8 +53,8 @@ function App() {
     <div className='App' id='content'>
       <Code clickRun={clickRun} />
       <Output outputs={outputs} />
-      {/* <Example examples={examples}/> */}
-      <Compile error={error} />
+      <Example examples={examples}/>
+      {/* <Compile error={error} /> */}
     </div>
   );
 }
